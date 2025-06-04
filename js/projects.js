@@ -18,7 +18,7 @@ export const projectsData = [
         title: 'Portofolio Pribadi',
         tags: ['HTML', 'CSS', 'JavaScript', 'Tailwind CSS'],
         description: 'Website portofolio pribadi yang menawan untuk saya sebagai web developer, menampilkan project-project dengan animasi halus dan desain yang elegan.',
-        link: 'https://github.com/bagusahmadka/portofolio.git'
+        link: 'https://github.com/bagusahmadka/bagusahmadka.github.io.git'
     }
 ];
 
