@@ -1,4 +1,4 @@
-import { renderAbout } from './about.js';
+import { renderAbout, setupDownloadCV } from './about.js';
 import { renderContact, setupContactForm } from './contact.js';
 import { renderHero } from './hero.js';
 import { renderNavbar, setupNavbar } from './navbar.js';
@@ -27,4 +27,5 @@ document.addEventListener('DOMContentLoaded', function() {
     setupSkills();
     setupContactForm();
     setupUtils();
+    setupDownloadCV();
 });
