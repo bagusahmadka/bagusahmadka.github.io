@@ -1,20 +1,20 @@
 export const projectsData = [
     {
-        image: './assets/images/1p.jpg',
+        image: './public/images/1p.jpg',
         title: 'Web eRecruitment',
         tags: ['React', 'Laravel', 'MYSQL', 'TailwindCSS'],
         description: 'Sebuah platform eRecruitment lengkap dengan fitur pelamar bisa melihat lowongan pekerjaan, melamar, dan mengikuti tes administrasi, psikotes, dan wawancara. Dibangun dengan tumpukan MERN dan antarmuka pengguna yang responsif menggunakan Tailwind CSS.',
         link: 'https://github.com/bagusahmadka/eRecruitment-Laravel.git'
     },
     {
-        image: './assets/images/p2.jpg',
+        image: './public/images/p2.jpg',
         title: 'Univgo',
         tags: ['Flutter', 'MYSQL', 'Dart'],
         description: 'Aplikasi berbasis mobile untuk memberikan kemudahan lulusan SMA/SMK dalam mencari universitas yang dia suka. Memungkinkan pengguna mencari dan melacak universitas dengan antarmuka yang intuitif.',
         link: 'https://github.com/bagusahmadka/Univgo.git'
     },
     {
-        image: './assets/images/6.jpg',
+        image: './public/images/6.jpg',
         title: 'Portofolio Pribadi',
         tags: ['HTML', 'CSS', 'JavaScript', 'Tailwind CSS'],
         description: 'Website portofolio pribadi yang menawan untuk saya sebagai web developer, menampilkan project-project dengan animasi halus dan desain yang elegan.',

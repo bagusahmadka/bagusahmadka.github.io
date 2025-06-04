@@ -1,6 +1,6 @@
 export function renderAbout() {
     // Gunakan path relatif yang konsisten
-    const aboutImagePath = './assets/images/same.jpg';
+    const aboutImagePath = './public/images/same.jpg';
     
     return `
     <section id="about" class="py-16 md:py-24 bg-white">

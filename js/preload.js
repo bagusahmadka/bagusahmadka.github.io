@@ -1,11 +1,11 @@
 export function preloadImages() {
     // Daftar gambar yang perlu di-preload
     const imagesToPreload = [
-        './assets/images/2.jpg',
-        './assets/images/same.jpg',
-        './assets/images/1p.jpg',
-        './assets/images/p2.jpg',
-        './assets/images/6.jpg'
+        './public/images/2.jpg',
+        './public/images/same.jpg',
+        './public/images/1p.jpg',
+        './public/images/p2.jpg',
+        './public/images/6.jpg'
     ];
     
     // Preload gambar

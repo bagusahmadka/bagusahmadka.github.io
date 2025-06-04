@@ -1,6 +1,6 @@
 export function renderHero() {
     // Gunakan path relatif yang konsisten
-    const profileImagePath = './assets/images/2.jpg';
+    const profileImagePath = './public/images/2.jpg';
     
     return `
     <header id="hero" class="bg-gradient-to-br from-indigo-600 to-purple-600 text-white pt-24 pb-16 md:pt-32 md:pb-24 min-h-screen flex items-center">
