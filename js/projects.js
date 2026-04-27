@@ -19,6 +19,20 @@ export const projectsData = [
         tags: ['HTML', 'CSS', 'JavaScript', 'Tailwind CSS'],
         description: 'Website portofolio pribadi yang menawan untuk saya sebagai web developer, menampilkan project-project dengan animasi halus dan desain yang elegan.',
         link: 'https://github.com/bagusahmadka/bagusahmadka.github.io.git'
+    },
+    {
+        image: './public/images/lg.jpg',
+        title: 'Mitra Jaya Print',
+        tags: ['Laravel', 'Filament', 'MYSQL'],
+        description: 'Mitra Jaya Print adalah sistem manajemen percetakan Web-to-Print berbasis Laravel dengan dukungan Filament Admin Panel. Sistem ini dirancang khusus untuk memudahkan pelanggan dalam memesan berbagai produk digital printing secara online dengan fitur lengkap mulai dari katalog produk, kustomisasi desain, upload file, hingga pembayaran dan pelacakan pesanan.',
+        link: 'https://github.com/bagusahmadka/filament-mjp.git'
+    },
+    {
+        image: './public/images/waste.jpeg',
+        title: 'Waste Classifier App',
+        tags: ['Python', 'TensorFlow', 'Flask'],
+        description: 'Aplikasi klasifikasi sampah berbasis machine learning yang dapat mengenali berbagai jenis sampah dan memberikan rekomendasi pengolahan yang tepat.',
+        link: 'https://github.com/bagusahmadka/waste_classifier_app.git'
     }
 ];
 

@@ -43,9 +43,9 @@ export function setupContactForm() {
     if (!contactForm || !formStatus || !submitBtn) return;
 
     // Hardcoded nilai dari .env (karena vanilla JS tidak otomatis load .env)
-    const emailJsPublicKey = 'bdIEEDBhWuW1DCwTt'; 
-    const serviceID = 'service_d2jlbd9'; 
-    const templateID = 'template_m53wf4s'; 
+    const emailJsPublicKey = 'jDXVI9-bt5aOXR0OT'; 
+    const serviceID = 'service_nw36rif'; 
+    const templateID = 'template_dgsr099'; 
 
     // Inisialisasi EmailJS dengan public key
     if (window.emailjs) {

@@ -23,7 +23,7 @@ export function renderFooter() {
 export function setupScrollToTop() {
     const scrollTopBtn = document.getElementById('scrollTopBtn');
     if (!scrollTopBtn) return;
-    
+
     window.addEventListener('scroll', () => {
         if (window.pageYOffset > 300) {
             scrollTopBtn.classList.remove('hidden');
@@ -31,13 +31,13 @@ export function setupScrollToTop() {
         } else {
             scrollTopBtn.classList.add('opacity-0');
             setTimeout(() => {
-                if (window.pageYOffset <= 300) { 
+                if (window.pageYOffset <= 300) {
                     scrollTopBtn.classList.add('hidden');
                 }
             }, 300);
         }
     });
-    
+
     scrollTopBtn.addEventListener('click', () => {
         window.scrollTo({ top: 0, behavior: 'smooth' });
     });
@@ -53,8 +53,8 @@ export function setupCurrentYear() {
 
 // Inisialisasi EmailJS
 export function initEmailJS() {
-    const emailJsPublicKey = 'bdIEEDBhWuW1DCwTt'; // Hardcoded dari .env
-    
+    const emailJsPublicKey = 'jDXVI9-bt5aOXR0OT'; // Hardcoded dari .env
+
     if (window.emailjs) {
         emailjs.init({ publicKey: emailJsPublicKey });
     }
