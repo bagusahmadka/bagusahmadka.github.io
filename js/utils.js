@@ -60,9 +60,34 @@ export function initEmailJS() {
     }
 }
 
+// Fungsi untuk animasi elemen saat scroll (Scroll Reveal)
+export function initScrollReveal() {
+    const reveals = document.querySelectorAll('.reveal');
+    if (!reveals.length) return;
+
+    const revealOptions = {
+        threshold: 0.15, // Memicu animasi ketika 15% elemen terlihat
+        rootMargin: "0px 0px -50px 0px"
+    };
+
+    const revealOnScroll = new IntersectionObserver(function(entries, observer) {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('reveal-active');
+                observer.unobserve(entry.target); // Hanya jalankan animasi sekali
+            }
+        });
+    }, revealOptions);
+
+    reveals.forEach(reveal => {
+        revealOnScroll.observe(reveal);
+    });
+}
+
 // Setup all utility functions
 export function setupUtils() {
     setupScrollToTop();
     setupCurrentYear();
     initEmailJS();
+    initScrollReveal();
 }

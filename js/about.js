@@ -9,7 +9,7 @@ export function renderAbout() {
                 Tentang Saya
             </h2>
             <div class="flex flex-col md:flex-row items-center md:space-x-12">
-                <div class="md:w-1/3 mb-8 md:mb-0">
+                <div class="md:w-1/3 mb-8 md:mb-0 reveal reveal-left">
                     <div class="rounded-xl shadow-xl w-full max-w-sm mx-auto overflow-hidden">
                         <img src="${aboutImagePath}" 
                              alt="Foto Tentang Saya" 
@@ -17,7 +17,7 @@ export function renderAbout() {
                              onerror="this.onerror=null; this.src='data:image/svg+xml,%3Csvg xmlns=\'http://www.w3.org/2000/svg\' width=\'400\' height=\'400\' viewBox=\'0 0 400 400\'%3E%3Crect width=\'400\' height=\'400\' fill=\'%23CCCCCC\'/%3E%3Ctext x=\'50%25\' y=\'50%25\' font-size=\'24\' text-anchor=\'middle\' dominant-baseline=\'middle\' fill=\'%23FFFFFF\'%3EError%3C/text%3E%3C/svg%3E';">
                     </div>
                 </div>
-                <div class="md:w-2/3 text-slate-600 text-lg leading-relaxed">
+                <div class="md:w-2/3 text-slate-600 text-lg leading-relaxed reveal reveal-right">
                     <p class="mb-4">
                         Selamat datang di portofolio digital saya! Saya adalah seorang mahasiswa program studi D3-Teknik Informatika dengan pengalaman lebih dari 2 tahun di bidang Freelancer pembuatan website dan juga jurnal. Saya memiliki hasrat mendalam untuk selalu mengeksplorasi hal baru dan juga selalu tertarik untuk beradaptasi dengan teknologi terbaru seperti penggunaan AI dalam menunjang Freelancer yang saya jalani.
                     </p>
@@ -44,190 +44,225 @@ export function renderAbout() {
 // Fungsi untuk generate dan download CV PDF
 export function setupDownloadCV() {
     document.addEventListener('click', async function(e) {
-        if (e.target && e.target.id === 'download-cv-btn') {
-            const { jsPDF } = window.jspdf;
-            const doc = new jsPDF({
-                unit: 'pt',
-                format: 'a4'
-            });
+        const btn = e.target.closest('#download-cv-btn');
+        if (btn) {
+            e.preventDefault();
+            
+            const originalText = btn.innerHTML;
+            btn.innerHTML = '<i class="fas fa-spinner fa-spin mr-2"></i>Membuat PDF...';
+            btn.disabled = true;
 
-            // Header: Nama besar
-            doc.setFont('helvetica', 'bold');
-            doc.setFontSize(22);
-            doc.setTextColor(18, 61, 112); // Biru tua
-            doc.text("BAGUS AHMAD KHOIRUL ATO’", 40, 35); // dari 60 jadi 35
+            try {
+                const { jsPDF } = window.jspdf;
+                const doc = new jsPDF({
+                    unit: 'pt',
+                    format: 'a4'
+                });
 
-            // Kontak: label tebal, isi normal
-            doc.setFontSize(12);
-            doc.setTextColor(33, 37, 41); // Hitam
-            let y = 55; // dari 85 jadi 55
-            const kontak = [
-                ["Address:", "Tembalang, Semarang"],
-                ["Phone:", "+62 889-5912-877"],
-                ["Email:", "bagusahmadka@gmail.com"],
-                ["Website:", "https://bagusahmadka.github.io/"]
-            ];
-            kontak.forEach(([label, value]) => {
-                doc.setFont('helvetica', 'bold');
-                doc.text(label, 40, y);
-                doc.setFont('helvetica', 'normal');
-                doc.text(value, 120, y);
-                y += 18;
-            });
+                let yPos = 40;
+                const leftMargin = 40;
+                const rightMargin = 555;
+                const contentWidth = rightMargin - leftMargin;
 
-            // Garis bawah header
-            doc.setDrawColor(180, 180, 180);
-            doc.setLineWidth(1);
-            doc.line(40, y + 5, doc.internal.pageSize.getWidth() - 40, y + 5);
+                // 1. Kotak abu-abu di kanan atas
+                doc.setFillColor(100, 100, 100); 
+                doc.rect(550, 0, 45, 190, 'F');
 
-            // SUMMARY
-            y += 30;
-            doc.setFont('helvetica', 'bold');
-            doc.setFontSize(13);
-            doc.setTextColor(44, 62, 80);
-            doc.text("SUMMARY", 40, y);
+                // 2. Foto Profil
+                try {
+                    const imgUrl = './public/images/same.jpg';
+                    const img = await new Promise((resolve, reject) => {
+                        const image = new Image();
+                        image.crossOrigin = 'Anonymous';
+                        image.onload = () => resolve(image);
+                        image.onerror = reject;
+                        image.src = imgUrl;
+                    });
+                    doc.addImage(img, 'JPEG', leftMargin, 30, 105, 135);
+                } catch (imgErr) {
+                    console.warn('Gagal memuat gambar untuk PDF', imgErr);
+                    doc.setFillColor(200, 200, 200);
+                    doc.rect(leftMargin, 30, 105, 135, 'F');
+                }
 
-            doc.setFont('helvetica', 'normal');
-            doc.setFontSize(11);
-            doc.setTextColor(60, 60, 60);
-            const summaryText = "I am a D3 Informatics Engineering student with more than 2 years of experience in website and journal freelancing. I have a deep desire to always explore new things and also always interested in adapting to the latest technology such as the use of AI in supporting my Freelancer. My journey in the world of technology began when I studied at Polines Informatics Engineering Study Program. Since then, I continue to hone my skills and knowledge in the field of Leadership, Public Speaking and concepts to create mobile-based applications and websites.";
-            const summaryLines = doc.splitTextToSize(summaryText, 515);
-            doc.text(summaryLines, 40, y + 18);
+                // 3. Header Text
+                const textStartX = 160;
+                doc.setFont('times', 'bold');
+                doc.setFontSize(22);
+                doc.setTextColor(0, 0, 0);
+                doc.text("Bagus Ahmad Khoirul Ato'", textStartX, 50);
 
-            // Hitung posisi Y setelah summary
-            y = y + 18 + summaryLines.length * 14 + 10;
+                doc.setFont('times', 'normal');
+                doc.setFontSize(11);
+                
+                let headerY = 75;
+                const lineSpacing = 16;
+                
+                doc.text("Address : Jl. Gondang timur 1, Tembalang, Semarang, Jawa Tengah", textStartX, headerY);
+                headerY += lineSpacing;
+                doc.text("Phone : +62 889-5912-877", textStartX, headerY);
+                headerY += lineSpacing;
+                doc.text("Email : bagusahmadka@gmail.com", textStartX, headerY);
+                headerY += lineSpacing;
+                doc.text("Linkedin : linkedin.com/in/bagus-ahmad-khoirul-ato-70a13b2ab", textStartX, headerY);
+                headerY += lineSpacing;
+                doc.text("Website : https://bagusahmadka.github.io/", textStartX, headerY);
 
-            // WORK EXPERIENCE
-            doc.setFont('helvetica', 'bold');
-            doc.setFontSize(13);
-            doc.setTextColor(44, 62, 80);
-            doc.text("WORK EXPERIENCE", 40, y);
+                yPos = 185;
 
-            doc.setFont('helvetica', 'normal');
-            doc.setFontSize(11);
-            doc.setTextColor(60, 60, 60);
+                // Helper untuk Judul Section
+                const addSectionTitle = (title) => {
+                    if (yPos > 780) { doc.addPage(); yPos = 40; }
+                    
+                    doc.setFont('times', 'bold');
+                    doc.setFontSize(14);
+                    doc.text(title, leftMargin, yPos);
+                    
+                    yPos += 5;
+                    doc.setLineWidth(1);
+                    doc.setDrawColor(0, 0, 0);
+                    doc.line(leftMargin, yPos, rightMargin, yPos);
+                    
+                    yPos += 15;
+                };
 
-            doc.autoTable({
-                startY: y + 10,
-                theme: 'plain',
-                styles: { fontSize: 11, textColor: [60, 60, 60] },
-                columnStyles: {
-                    0: { cellWidth: 350 },
-                    1: { cellWidth: 180, halign: 'right' }
-                },
-                body: [
-                    [
-                        { content: 'Project Based Learning for the creation of eRecruitment Website for MIKA GROUP\n• Working on Frontend in its applicant view\n• Working on the Backend for all Frontends\n• Creating Database and managing github repository\n• Controlling all applicant side' },
-                        { content: 'Mar 2025 - Present' }
-                    ],
-                    [
-                        { content: 'Project Based Learning for Univgo Mobile App development\n• Holds the login and register features for users along with the backend\n• Perform Database creation\n• Control the github repository' },
-                        { content: 'Aug 2024 - Dec 2024' }
-                    ],
-                    [
-                        { content: 'Creating a Website for the Home Affairs Ministry of BEM Polines\n• Creating a website to track geolocation for picket schedules in BEM.' },
-                        { content: 'Mar 2024 - Mar 2024' }
-                    ]
-                ]
-            });
+                // Helper untuk Bullet Points
+                const addBullet = (text, indent = 10) => {
+                    doc.setFont('times', 'normal');
+                    doc.setFontSize(11);
+                    
+                    const bulletX = leftMargin + indent;
+                    const textX = bulletX + 12;
+                    const maxTextWidth = rightMargin - textX;
+                    
+                    const splitText = doc.splitTextToSize(text, maxTextWidth);
+                    
+                    if (yPos + (splitText.length * 14) > 800) { doc.addPage(); yPos = 40; }
+                    
+                    doc.circle(bulletX + 3, yPos - 4, 2, 'F');
+                    
+                    if (splitText.length > 1) {
+                        doc.text(splitText, textX, yPos); // fallback left align
+                    } else {
+                        doc.text(text, textX, yPos);
+                    }
+                    
+                    yPos += splitText.length * 14 + 4;
+                };
 
-            // Organizational Experience
-            y = doc.lastAutoTable.finalY + 15;
-            doc.setFont('helvetica', 'bold');
-            doc.setFontSize(13);
-            doc.setTextColor(44, 62, 80);
-            doc.text("ORGANIZATIONAL EXPERIENCE", 40, y);
+                // --- SUMMARY ---
+                addSectionTitle('Summary');
+                doc.setFont('times', 'normal');
+                doc.setFontSize(11);
+                const summaryText = "I am a D3 Informatics Engineering student with more than 2 years of experience in website and journal freelancing. I have a deep desire to always explore new things and also always interested in adapting to the latest technology such as the use of AI in supporting my Freelancer. My journey in the world of technology began when I studied at Polines Informatics Engineering Study Program. Since then, I continue to hone my skills and knowledge in the field of Leadership, Public Speaking and concepts to create mobile-based applications and websites.";
+                
+                const summaryLines = doc.splitTextToSize(summaryText, contentWidth);
+                doc.text(summaryLines, leftMargin, yPos);
+                yPos += summaryLines.length * 14 + 15;
 
-            doc.setFont('helvetica', 'normal');
-            doc.setFontSize(11);
-            doc.setTextColor(60, 60, 60);
+                // --- EDUCATION ---
+                addSectionTitle('Education');
+                doc.setFont('times', 'normal');
+                doc.setFontSize(11);
+                if (yPos > 780) { doc.addPage(); yPos = 40; }
+                doc.text("2023 - 2026 | State Polytechnic of Semarang | Diploma in Informatics Engineering", leftMargin, yPos);
+                yPos += 14;
+                doc.text("Relevant coursework in Web Development Design as well as Mobile Applications", leftMargin, yPos);
+                yPos += 14;
+                doc.text("IPK: 3.88", leftMargin, yPos);
+                yPos += 20;
 
-            doc.autoTable({
-                startY: y + 10,
-                theme: 'plain',
-                styles: { fontSize: 11, textColor: [60, 60, 60] },
-                columnStyles: {
-                    0: { cellWidth: 350 },
-                    1: { cellWidth: 180, halign: 'right' }
-                },
-                body: [
-                    [
-                        { content: 'Leader of Rohis Polines Student Activity Unit' },
-                        { content: 'Aug 2024 - May 2025' }
-                    ],
-                    [
-                        { content: 'Leader of Rohis Senior High School 2 Demak' },
-                        { content: 'June 2021 - June 2023' }
-                    ],
-                    [
-                        { content: 'Leader of Rohis Senior High School 2 Demak' },
-                        { content: 'June 2018 - June 2019' }
-                    ]
-                ]
-            });
+                // --- INTERNSHIP EXPERIENCE ---
+                addSectionTitle('Internship Experience');
+                doc.setFont('times', 'bold');
+                if (yPos > 780) { doc.addPage(); yPos = 40; }
+                doc.text("August 2025 - January 2026 | CV.Agra Prima Indonesia | Full Stack Developer", leftMargin, yPos);
+                yPos += 16;
+                addBullet("During my internship as a Full-Stack Developer, I developed and maintained web applications from start to finish, from system design and feature implementation to performance optimization. I also built RESTful APIs, managed databases and data structures, and performed debugging, testing, and optimization to ensure the system remained stable and responsive. Additionally, I managed version control using Git and maintained code quality through documentation and best development practices.");
+                yPos += 10;
 
-            // Education
-            y = doc.lastAutoTable.finalY + 10;
-            doc.setFont('helvetica', 'bold');
-            doc.setFontSize(13);
-            doc.setTextColor(44, 62, 80);
-            doc.text("EDUCATION", 40, y);
+                // --- ACADEMIC PROJECT ---
+                addSectionTitle('Academic Project');
+                
+                doc.setFont('times', 'bold');
+                if (yPos > 780) { doc.addPage(); yPos = 40; }
+                doc.text("Project Based Learning for the creation of eRecruitment Website for MIKA GROUP", leftMargin, yPos);
+                yPos += 16;
+                addBullet("Working on Frontend in its applicant view");
+                addBullet("Working on the Backend for all Frontends");
+                addBullet("Creating Database and managing github repository");
+                addBullet("Controlling all applicant side");
+                yPos += 10;
 
-            doc.setFont('helvetica', 'normal');
-            doc.setFontSize(11);
-            doc.setTextColor(60, 60, 60);
+                doc.setFont('times', 'bold');
+                if (yPos > 780) { doc.addPage(); yPos = 40; }
+                doc.text("Project Based Learning for Univgo Mobile App development", leftMargin, yPos);
+                yPos += 16;
+                addBullet("Holds the login and register features for users along with the backend");
+                addBullet("Perform Database creation");
+                addBullet("Control the github repository");
+                yPos += 10;
 
-            doc.autoTable({
-                startY: y + 10,
-                theme: 'plain',
-                styles: { fontSize: 11, textColor: [60, 60, 60], cellPadding: 2 }, // cellPadding kecil
-                margin: { bottom: 0 }, // hilangkan margin bawah
-                columnStyles: {
-                    0: { cellWidth: 350 },
-                    1: { cellWidth: 180, halign: 'right' }
-                },
-                body: [
-                    [
-                        { content: 'Diploma in Informatics Engineering\nState Polytechnic of Semarang\n• Relevant coursework in Web Development Design as well as Mobile Applications\n• IPK : 3.93' },
-                        { content: 'Aug 2023 - Present' }
-                    ],
-                    [
-                        { content: 'Senior High School 2 Demak\n• Specialization in Mathematics and Science (MIPA)' },
-                        { content: 'July 2020 - July 2023' }
-                    ],
-                    [
-                        { content: 'Junior High School 5 Demak\n• Specialization in Science' },
-                        { content: 'July 2017 - July 2019' }
-                    ]
-                ]
-            });
+                doc.setFont('times', 'bold');
+                if (yPos > 780) { doc.addPage(); yPos = 40; }
+                doc.text("Creating a Website Mitra Jaya Print for CV. Agra Prima Indonesia", leftMargin, yPos);
+                yPos += 16;
+                addBullet("This website is used to view the product catalog, place printing orders, specify designs or requirements, upload files, make payments, and track order status online.");
+                yPos += 10;
 
-            // Additional Information
-            y = doc.lastAutoTable.finalY + 10; // kurangi jarak antar section
-            doc.setFont('helvetica', 'bold');
-            doc.setFontSize(13);
-            doc.setTextColor(44, 62, 80);
-            doc.text("ADDITIONAL INFORMATION", 40, y);
+                doc.setFont('times', 'bold');
+                if (yPos > 780) { doc.addPage(); yPos = 40; }
+                doc.text("Creating a Flutter-based mobile application for waste classifier app", leftMargin, yPos);
+                yPos += 16;
+                addBullet("This app is designed to support sustainable waste management by helping users identify recyclable materials through image recognition.");
+                yPos += 10;
 
-            doc.setFont('helvetica', 'normal');
-            doc.setFontSize(11);
-            doc.setTextColor(60, 60, 60);
-            const additionalText = 
-                "• Technical Skills: a little familiar with html, dart, typescript, and react and laravel frameworks and familiar with using MySQL.\n" +
-                "• Languages: English, Indonesian.\n" +
-                "• Communication\n" +
-                "• Public Speaking\n" +
-                "• Leadership";
-            const additionalLines = doc.splitTextToSize(additionalText, 515);
+                // --- ORGANIZATIONAL EXPERIENCE ---
+                addSectionTitle('Organizational Experience');
+                doc.setFont('times', 'bold');
+                if (yPos > 780) { doc.addPage(); yPos = 40; }
+                doc.text("Juni 2024 - Juni 2025 | Leader of Rohis Polines | UKM Jazirah", leftMargin, yPos);
+                yPos += 16;
+                addBullet("is fully responsible for the overall operation of the organization, from planning and implementation to the evaluation of work programs. He ensures that every activity aligns with the organization's vision and mission, coordinates all executive members, and makes strategic decisions to achieve the established goals.");
+                addBullet("Additionally, he is responsible for mentoring members, maintaining good relations with both internal and external campus stakeholders, and ensuring proper administrative procedures and organizational transparency. He also plays a crucial role in advancing campus outreach and fostering an Islamic, conducive, and sustainable environment.");
+                yPos += 10;
 
-            // Tulis setiap baris dengan spasi konsisten (misal 14pt)
-            let addY = y + 18;
-            additionalLines.forEach(line => {
-                doc.text(line, 40, addY);
-                addY += 14;
-            });
+                // --- SKILLS ---
+                addSectionTitle('Skills');
+                
+                doc.setFont('times', 'bold');
+                if (yPos > 780) { doc.addPage(); yPos = 40; }
+                doc.text("Hard Skill", leftMargin, yPos);
+                yPos += 16;
+                const hardSkills = ["HTML5", "CSS3", "JavaScript", "TypeScript", "Tailwind CSS", "Laravel", "React", "MySQL", "GitHub", "Figma"];
+                hardSkills.forEach(skill => addBullet(skill));
+                yPos += 5;
 
-            doc.save("CV_BagusAhmadKhoirulAto.pdf");
+                doc.setFont('times', 'bold');
+                if (yPos > 780) { doc.addPage(); yPos = 40; }
+                doc.text("Soft Skill", leftMargin, yPos);
+                yPos += 16;
+                const softSkills = ["Problem Solving", "Critical Thinking", "Time Management"];
+                softSkills.forEach(skill => addBullet(skill));
+                yPos += 5;
+
+                doc.setFont('times', 'bold');
+                if (yPos > 780) { doc.addPage(); yPos = 40; }
+                doc.text("Languages", leftMargin, yPos);
+                yPos += 16;
+                addBullet("Indonesian");
+                addBullet("English");
+
+                doc.save("CV_BagusAhmadKhoirulAto.pdf");
+
+            } catch (error) {
+                console.error("Kesalahan saat generate PDF:", error);
+                alert("Maaf, terjadi kesalahan saat membuat CV.");
+            } finally {
+                btn.disabled = false;
+                btn.innerHTML = originalText;
+            }
         }
     });
 }
+

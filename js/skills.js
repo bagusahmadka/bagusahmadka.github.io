@@ -33,7 +33,7 @@ export function setupSkills() {
     
     skillsListContainer.innerHTML = '';
     
-    skillsData.forEach(skill => {
+    skillsData.forEach((skill, index) => {
         let iconHtml = '';
         if (skill.isCustom && skill.svg) {
             iconHtml = skill.svg;
@@ -42,11 +42,13 @@ export function setupSkills() {
         }
 
         const skillItem = `
-            <div class="bg-white p-6 rounded-xl shadow-lg hover:shadow-indigo-200 transition-all duration-300 transform hover:-translate-y-1 flex flex-col items-center justify-center">
-                <div class="${skill.color} text-5xl mb-3">
-                    ${iconHtml}
+            <div class="reveal reveal-up" style="transition-delay: ${index * 50}ms;">
+                <div class="bg-white p-6 rounded-xl shadow-lg hover:shadow-indigo-200 transition-all duration-300 transform hover:-translate-y-1 flex flex-col items-center justify-center h-full">
+                    <div class="${skill.color} text-5xl mb-3">
+                        ${iconHtml}
+                    </div>
+                    <h3 class="text-lg font-semibold text-slate-700">${skill.name}</h3>
                 </div>
-                <h3 class="text-lg font-semibold text-slate-700">${skill.name}</h3>
             </div>
         `;
         

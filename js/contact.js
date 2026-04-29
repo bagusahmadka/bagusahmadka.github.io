@@ -5,7 +5,7 @@ export function renderContact() {
             <h2 class="text-3xl md:text-4xl font-bold text-center text-slate-800 mb-12 relative pb-4 after:content-[''] after:absolute after:left-1/2 after:-translate-x-1/2 after:bottom-0 after:w-20 after:h-1 after:bg-indigo-600 after:rounded-full">
                 Hubungi Saya
             </h2>
-            <form id="contact-form" class="max-w-xl mx-auto bg-white p-8 rounded-xl shadow-xl">
+            <form id="contact-form" class="max-w-xl mx-auto bg-white p-8 rounded-xl shadow-xl reveal reveal-up">
                 <p class="text-center text-slate-600 mb-6">Ada pertanyaan atau ingin berkolaborasi? Jangan ragu untuk mengirim pesan.</p>
                 <div class="mb-5">
                     <label for="name" class="block text-slate-700 text-sm font-semibold mb-2">Nama Lengkap <span class="text-red-500">*</span></label>

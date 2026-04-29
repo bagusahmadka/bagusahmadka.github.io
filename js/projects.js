@@ -89,19 +89,21 @@ export function setupProjects() {
     projectGallery.innerHTML = ''; 
     projectsData.forEach((project, index) => {
         const projectItem = `
-            <div class="bg-white rounded-xl shadow-lg overflow-hidden transform hover:scale-105 transition-all duration-300 cursor-pointer group" data-index="${index}">
-                <div class="relative h-56">
-                    <img src="${project.image}" alt="${project.title}" class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-110" onerror="this.onerror=null; this.src='${errorImageSVG}';">
-                    <div class="absolute inset-0 bg-black bg-opacity-20 group-hover:bg-opacity-40 transition-opacity duration-300 flex items-center justify-center">
-                        <span class="text-white text-lg font-semibold opacity-0 group-hover:opacity-100 transition-opacity duration-300"><i class="fas fa-search-plus mr-2"></i> Lihat Detail</span>
+            <div class="reveal reveal-up" style="transition-delay: ${index * 100}ms;">
+                <div class="bg-white rounded-xl shadow-lg overflow-hidden transform hover:scale-105 transition-all duration-300 cursor-pointer group h-full" data-index="${index}">
+                    <div class="relative h-56">
+                        <img src="${project.image}" alt="${project.title}" class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-110" onerror="this.onerror=null; this.src='${errorImageSVG}';">
+                        <div class="absolute inset-0 bg-black bg-opacity-20 group-hover:bg-opacity-40 transition-opacity duration-300 flex items-center justify-center">
+                            <span class="text-white text-lg font-semibold opacity-0 group-hover:opacity-100 transition-opacity duration-300"><i class="fas fa-search-plus mr-2"></i> Lihat Detail</span>
+                        </div>
                     </div>
-                </div>
-                <div class="p-6">
-                    <h3 class="text-xl font-semibold mb-2 text-slate-800">${project.title}</h3>
-                    <div class="flex flex-wrap gap-2 mb-3">
-                        ${project.tags.map(tag => `<span class="text-xs bg-indigo-100 text-indigo-700 px-2 py-1 rounded-full font-medium">${tag}</span>`).join('')}
+                    <div class="p-6 flex flex-col flex-grow">
+                        <h3 class="text-xl font-semibold mb-2 text-slate-800">${project.title}</h3>
+                        <div class="flex flex-wrap gap-2 mb-3">
+                            ${project.tags.map(tag => `<span class="text-xs bg-indigo-100 text-indigo-700 px-2 py-1 rounded-full font-medium">${tag}</span>`).join('')}
+                        </div>
+                        <p class="text-slate-600 text-sm leading-relaxed mt-auto">${project.description.substring(0, 100)}...</p>
                     </div>
-                    <p class="text-slate-600 text-sm leading-relaxed">${project.description.substring(0, 100)}...</p>
                 </div>
             </div>
         `;

@@ -1,6 +1,6 @@
 import { renderAbout, setupDownloadCV } from './about.js';
 import { renderContact, setupContactForm } from './contact.js';
-import { renderHero } from './hero.js';
+import { renderHero, setupHero } from './hero.js';
 import { renderNavbar, setupNavbar } from './navbar.js';
 import { preloadImages } from './preload.js';
 import { renderProjects, setupProjects } from './projects.js';
@@ -23,6 +23,7 @@ document.addEventListener('DOMContentLoaded', function() {
     
     // Initialize all interactive elements
     setupNavbar();
+    setupHero();
     setupProjects();
     setupSkills();
     setupContactForm();
