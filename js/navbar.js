@@ -1,40 +1,4 @@
-export function renderNavbar() {
-    return `
-    <nav id="navbar" class="bg-white shadow-md sticky top-0 z-50 transition-all duration-300">
-        <div class="container mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="flex items-center justify-between h-16">
-                <div class="flex items-center">
-                    <a href="#hero" class="text-2xl font-bold text-indigo-600 hover:text-indigo-700 transition-colors">
-                        Bagus Ahmad Khoirul Ato'
-                    </a>
-                </div>
-                <div class="hidden md:flex space-x-6">
-                    <a href="#hero" class="nav-link text-slate-600 hover:text-indigo-600 px-3 py-2 rounded-md text-sm font-medium transition-colors">Beranda</a>
-                    <a href="#about" class="nav-link text-slate-600 hover:text-indigo-600 px-3 py-2 rounded-md text-sm font-medium transition-colors">Tentang Saya</a>
-                    <a href="#projects" class="nav-link text-slate-600 hover:text-indigo-600 px-3 py-2 rounded-md text-sm font-medium transition-colors">Proyek</a>
-                    <a href="#skills" class="nav-link text-slate-600 hover:text-indigo-600 px-3 py-2 rounded-md text-sm font-medium transition-colors">Keahlian</a>
-                    <a href="#contact" class="nav-link text-slate-600 hover:text-indigo-600 px-3 py-2 rounded-md text-sm font-medium transition-colors">Kontak</a>
-                </div>
-                <div class="md:hidden flex items-center">
-                    <button id="menu-btn" type="button" class="text-slate-500 hover:text-indigo-600 focus:outline-none focus:text-indigo-600" aria-controls="mobile-menu" aria-expanded="false">
-                        <span class="sr-only">Buka menu utama</span>
-                        <i class="fas fa-bars fa-lg"></i>
-                    </button>
-                </div>
-            </div>
-        </div>
-        <div id="mobile-menu" class="md:hidden hidden bg-white shadow-lg border-t border-slate-200">
-            <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3">
-                <a href="#hero" class="nav-link-mobile block text-slate-600 hover:bg-indigo-50 hover:text-indigo-600 px-3 py-2 rounded-md text-base font-medium transition-colors">Beranda</a>
-                <a href="#about" class="nav-link-mobile block text-slate-600 hover:bg-indigo-50 hover:text-indigo-600 px-3 py-2 rounded-md text-base font-medium transition-colors">Tentang Saya</a>
-                <a href="#projects" class="nav-link-mobile block text-slate-600 hover:bg-indigo-50 hover:text-indigo-600 px-3 py-2 rounded-md text-base font-medium transition-colors">Proyek</a>
-                <a href="#skills" class="nav-link-mobile block text-slate-600 hover:bg-indigo-50 hover:text-indigo-600 px-3 py-2 rounded-md text-base font-medium transition-colors">Keahlian</a>
-                <a href="#contact" class="nav-link-mobile block text-slate-600 hover:bg-indigo-50 hover:text-indigo-600 px-3 py-2 rounded-md text-base font-medium transition-colors">Kontak</a>
-            </div>
-        </div>
-    </nav>
-    `;
-}
+
 
 export function setupNavbar() {
     const menuBtn = document.getElementById('menu-btn');
@@ -103,4 +67,61 @@ export function setupNavbar() {
         window.addEventListener('scroll', changeNavOnScroll);
         changeNavOnScroll();
     }
+
+    // Setup Dark Mode Toggle
+    const themeToggleDarkIcon = document.getElementById('theme-toggle-dark-icon');
+    const themeToggleLightIcon = document.getElementById('theme-toggle-light-icon');
+    const themeToggleDarkIconMobile = document.getElementById('theme-toggle-dark-icon-mobile');
+    const themeToggleLightIconMobile = document.getElementById('theme-toggle-light-icon-mobile');
+    
+    const themeToggleBtn = document.getElementById('theme-toggle');
+    const themeToggleBtnMobile = document.getElementById('theme-toggle-mobile');
+
+    // Change the icons inside the button based on previous settings
+    function updateIcons() {
+        if (localStorage.getItem('color-theme') === 'dark' || (!('color-theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+            themeToggleLightIcon?.classList.remove('hidden');
+            themeToggleDarkIcon?.classList.add('hidden');
+            themeToggleLightIconMobile?.classList.remove('hidden');
+            themeToggleDarkIconMobile?.classList.add('hidden');
+        } else {
+            themeToggleLightIcon?.classList.add('hidden');
+            themeToggleDarkIcon?.classList.remove('hidden');
+            themeToggleLightIconMobile?.classList.add('hidden');
+            themeToggleDarkIconMobile?.classList.remove('hidden');
+        }
+    }
+    
+    updateIcons();
+
+    function toggleTheme() {
+        // toggle icons inside button
+        themeToggleDarkIcon?.classList.toggle('hidden');
+        themeToggleLightIcon?.classList.toggle('hidden');
+        themeToggleDarkIconMobile?.classList.toggle('hidden');
+        themeToggleLightIconMobile?.classList.toggle('hidden');
+
+        // if set via local storage previously
+        if (localStorage.getItem('color-theme')) {
+            if (localStorage.getItem('color-theme') === 'light') {
+                document.documentElement.classList.add('dark');
+                localStorage.setItem('color-theme', 'dark');
+            } else {
+                document.documentElement.classList.remove('dark');
+                localStorage.setItem('color-theme', 'light');
+            }
+        // if NOT set via local storage previously
+        } else {
+            if (document.documentElement.classList.contains('dark')) {
+                document.documentElement.classList.remove('dark');
+                localStorage.setItem('color-theme', 'light');
+            } else {
+                document.documentElement.classList.add('dark');
+                localStorage.setItem('color-theme', 'dark');
+            }
+        }
+    }
+
+    themeToggleBtn?.addEventListener('click', toggleTheme);
+    themeToggleBtnMobile?.addEventListener('click', toggleTheme);
 }

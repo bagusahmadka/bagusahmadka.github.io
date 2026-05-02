@@ -36,39 +36,7 @@ export const projectsData = [
     }
 ];
 
-export function renderProjects() {
-    // SVG fallback untuk error gambar
-    const errorImageSVG = 'data:image/svg+xml,%3Csvg xmlns=\'http://www.w3.org/2000/svg\' width=\'600\' height=\'400\' viewBox=\'0 0 600 400\'%3E%3Crect width=\'600\' height=\'400\' fill=\'%23CCCCCC\'/%3E%3Ctext x=\'50%25\' y=\'50%25\' font-size=\'24\' text-anchor=\'middle\' dominant-baseline=\'middle\' fill=\'%23FFFFFF\'%3EError Memuat Gambar%3C/text%3E%3C/svg%3E';
-    
-    return `
-    <section id="projects" class="py-16 md:py-24 bg-slate-100">
-        <div class="container mx-auto px-4 sm:px-6 lg:px-8">
-            <h2 class="text-3xl md:text-4xl font-bold text-center text-slate-800 mb-12 relative pb-4 after:content-[''] after:absolute after:left-1/2 after:-translate-x-1/2 after:bottom-0 after:w-20 after:h-1 after:bg-indigo-600 after:rounded-full">
-                Proyek Unggulan
-            </h2>
-            <div id="project-gallery" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
-            </div>
-        </div>
-    </section>
 
-    <div id="project-modal" class="fixed inset-0 bg-black bg-opacity-75 flex items-center justify-center p-4 hidden z-[100] transition-opacity duration-300 opacity-0">
-        <div class="bg-white p-6 sm:p-8 rounded-xl shadow-2xl max-w-2xl w-full relative transform scale-95 transition-transform duration-300">
-            <button id="close-modal-btn" class="absolute top-4 right-4 text-slate-500 hover:text-red-600 text-2xl transition-colors" aria-label="Tutup modal">
-                <i class="fas fa-times"></i>
-            </button>
-            <div class="w-full max-h-80 flex items-center justify-center overflow-hidden rounded-lg mb-4 bg-slate-100">
-                <img id="modal-img" src="" alt="Detail Proyek" class="w-full h-auto object-contain" onerror="this.onerror=null; this.src='${errorImageSVG}';">
-            </div>
-            <h3 id="modal-title" class="text-2xl font-bold mb-2 text-slate-800"></h3>
-            <div id="modal-tags" class="mb-3"></div>
-            <p id="modal-description" class="text-slate-600 mb-4 text-sm sm:text-base leading-relaxed max-h-40 overflow-y-auto"></p>
-            <a id="modal-link" href="#" target="_blank" rel="noopener noreferrer" class="inline-flex items-center bg-indigo-600 text-white px-5 py-2.5 rounded-lg font-medium hover:bg-indigo-700 transition-colors shadow-md hover:shadow-lg transform hover:scale-105">
-                <i class="fas fa-external-link-alt mr-2"></i> Kunjungi Proyek
-            </a>
-        </div>
-    </div>
-    `;
-}
 
 export function setupProjects() {
     const projectGallery = document.getElementById('project-gallery');
@@ -90,19 +58,19 @@ export function setupProjects() {
     projectsData.forEach((project, index) => {
         const projectItem = `
             <div class="reveal reveal-up" style="transition-delay: ${index * 100}ms;">
-                <div class="bg-white rounded-xl shadow-lg overflow-hidden transform hover:scale-105 transition-all duration-300 cursor-pointer group h-full" data-index="${index}">
-                    <div class="relative h-56">
-                        <img src="${project.image}" alt="${project.title}" class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-110" onerror="this.onerror=null; this.src='${errorImageSVG}';">
-                        <div class="absolute inset-0 bg-black bg-opacity-20 group-hover:bg-opacity-40 transition-opacity duration-300 flex items-center justify-center">
-                            <span class="text-white text-lg font-semibold opacity-0 group-hover:opacity-100 transition-opacity duration-300"><i class="fas fa-search-plus mr-2"></i> Lihat Detail</span>
+                <div class="bg-white/80 dark:bg-slate-800/80 backdrop-blur-sm rounded-xl shadow-lg hover:shadow-xl dark:shadow-none dark:hover:shadow-indigo-500/20 border border-transparent dark:border-slate-700 overflow-hidden transform hover:-translate-y-2 transition-all duration-300 cursor-pointer group h-full flex flex-col" data-index="${index}">
+                    <div class="relative h-56 overflow-hidden">
+                        <img src="${project.image}" alt="${project.title}" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" onerror="this.onerror=null; this.src='${errorImageSVG}';">
+                        <div class="absolute inset-0 bg-indigo-900/0 group-hover:bg-indigo-900/40 backdrop-blur-[0px] group-hover:backdrop-blur-sm transition-all duration-300 flex items-center justify-center">
+                            <span class="text-white text-lg font-semibold opacity-0 group-hover:opacity-100 transform translate-y-4 group-hover:translate-y-0 transition-all duration-300"><i class="fas fa-search-plus mr-2"></i> Lihat Detail</span>
                         </div>
                     </div>
                     <div class="p-6 flex flex-col flex-grow">
-                        <h3 class="text-xl font-semibold mb-2 text-slate-800">${project.title}</h3>
-                        <div class="flex flex-wrap gap-2 mb-3">
-                            ${project.tags.map(tag => `<span class="text-xs bg-indigo-100 text-indigo-700 px-2 py-1 rounded-full font-medium">${tag}</span>`).join('')}
+                        <h3 class="text-xl font-bold mb-2 text-slate-800 dark:text-white group-hover:text-indigo-600 dark:group-hover:text-indigo-400 transition-colors">${project.title}</h3>
+                        <div class="flex flex-wrap gap-2 mb-4">
+                            ${project.tags.map(tag => `<span class="text-xs bg-indigo-50 dark:bg-indigo-900/50 text-indigo-600 dark:text-indigo-300 px-2.5 py-1 rounded-full font-medium border border-indigo-100 dark:border-indigo-800">${tag}</span>`).join('')}
                         </div>
-                        <p class="text-slate-600 text-sm leading-relaxed mt-auto">${project.description.substring(0, 100)}...</p>
+                        <p class="text-slate-600 dark:text-slate-400 text-sm leading-relaxed mt-auto line-clamp-3">${project.description}</p>
                     </div>
                 </div>
             </div>
@@ -135,7 +103,7 @@ export function setupProjects() {
         modalDescription.textContent = project.description;
         
         modalTagsContainer.innerHTML = project.tags.map(tag => 
-            `<span class="inline-block bg-slate-200 text-slate-700 text-xs font-semibold mr-2 mb-2 px-2.5 py-1 rounded-full">${tag}</span>`
+            `<span class="inline-block bg-slate-100 dark:bg-slate-700 text-slate-700 dark:text-slate-200 border border-slate-200 dark:border-slate-600 text-xs font-semibold mr-2 mb-2 px-3 py-1 rounded-full">${tag}</span>`
         ).join('');
 
         if (project.link && project.link !== '#') {

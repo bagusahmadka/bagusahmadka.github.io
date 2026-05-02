@@ -13,19 +13,7 @@ export const skillsData = [
     { name: 'Figma', iconClass: 'fab fa-figma', color: 'text-purple-500' }
 ];
 
-export function renderSkills() {
-    return `
-    <section id="skills" class="py-16 md:py-24 bg-white">
-        <div class="container mx-auto px-4 sm:px-6 lg:px-8">
-            <h2 class="text-3xl md:text-4xl font-bold text-center text-slate-800 mb-12 relative pb-4 after:content-[''] after:absolute after:left-1/2 after:-translate-x-1/2 after:bottom-0 after:w-20 after:h-1 after:bg-indigo-600 after:rounded-full">
-                Keahlian Teknis
-            </h2>
-            <div id="skills-list" class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-6 text-center">
-            </div>
-        </div>
-    </section>
-    `;
-}
+
 
 export function setupSkills() {
     const skillsListContainer = document.getElementById('skills-list');
@@ -43,11 +31,11 @@ export function setupSkills() {
 
         const skillItem = `
             <div class="reveal reveal-up" style="transition-delay: ${index * 50}ms;">
-                <div class="bg-white p-6 rounded-xl shadow-lg hover:shadow-indigo-200 transition-all duration-300 transform hover:-translate-y-1 flex flex-col items-center justify-center h-full">
+                <div class="bg-white dark:bg-slate-800 border border-transparent dark:border-slate-700 p-6 rounded-xl shadow-lg hover:shadow-indigo-200 dark:hover:shadow-indigo-900/50 transition-all duration-300 transform hover:-translate-y-2 flex flex-col items-center justify-center h-full">
                     <div class="${skill.color} text-5xl mb-3">
                         ${iconHtml}
                     </div>
-                    <h3 class="text-lg font-semibold text-slate-700">${skill.name}</h3>
+                    <h3 class="text-lg font-semibold text-slate-700 dark:text-slate-200">${skill.name}</h3>
                 </div>
             </div>
         `;
