@@ -1,5 +1,12 @@
 export const projectsData = [
     {
+        image: './public/images/technorra_hero.png',
+        title: 'Technorra Digital Agency',
+        tags: ['Agency', 'Web Development', 'Digital Solutions'],
+        description: 'Technorra adalah agensi digital yang berfokus pada penyediaan solusi teknologi dan desain kreatif untuk membantu bisnis berkembang di era modern. Platform ini merupakan wajah utama dari layanan unggulan kami.',
+        link: 'https://technorra.vercel.app'
+    },
+    {
         image: './public/images/1p.jpg',
         title: 'Web eRecruitment',
         tags: ['React', 'Laravel', 'MYSQL', 'TailwindCSS'],
@@ -24,7 +31,7 @@ export const projectsData = [
         image: './public/images/lg.jpg',
         title: 'Mitra Jaya Print',
         tags: ['Laravel', 'Filament', 'MYSQL'],
-        description: 'Mitra Jaya Print adalah sistem manajemen percetakan Web-to-Print berbasis Laravel dengan dukungan Filament Admin Panel. Sistem ini dirancang khusus untuk memudahkan pelanggan dalam memesan berbagai produk digital printing secara online dengan fitur lengkap mulai dari katalog produk, kustomisasi desain, upload file, hingga pembayaran dan pelacakan pesanan.',
+        description: 'Mitra Jaya Print adalah sistem manajemen percetakan Web-to-Print berbasis Laravel dengan dukungan Filament Admin Panel. Sistem ini dirancang khusus untuk memudahkan pelanggan dalam memesan berbagai produk digital printing secara online.',
         link: 'https://github.com/bagusahmadka/filament-mjp.git'
     },
     {
@@ -33,10 +40,36 @@ export const projectsData = [
         tags: ['Python', 'TensorFlow', 'Flask'],
         description: 'Aplikasi klasifikasi sampah berbasis machine learning yang dapat mengenali berbagai jenis sampah dan memberikan rekomendasi pengolahan yang tepat.',
         link: 'https://github.com/bagusahmadka/waste_classifier_app.git'
+    },
+    {
+        image: './public/images/syntara.jpg',
+        title: 'Syntara (Publikasi Jurnal)',
+        tags: ['Web Development', 'Portal Jurnal'],
+        description: 'Aplikasi web platform jasa publikasi jurnal bernama Syntara. Sistem ini dirancang untuk memudahkan proses pengelolaan dan publikasi karya ilmiah serta jurnal secara efisien.',
+        link: 'https://github.com/afikque23/Syntara.git'
+    },
+    {
+        image: './public/images/traciio.jpg',
+        title: 'Traciio (Sistem CRM)',
+        tags: ['CRM', 'Web Application'],
+        description: 'Traciio adalah sistem Customer Relationship Management (CRM) yang dibangun untuk membantu bisnis dalam mengelola interaksi pelanggan, pencatatan data penjualan, dan efisiensi operasional.',
+        link: 'https://github.com/Vdevelops/Traciio.git'
+    },
+    {
+        image: './public/images/undangan-nikah.jpg',
+        title: 'Undangan Nikah Digital',
+        tags: ['HTML', 'CSS', 'JavaScript'],
+        description: 'Template website undangan pernikahan digital yang modern dan elegan. Memiliki fitur informasi detail acara, cerita pasangan, hingga lokasi interaktif yang memanjakan tamu undangan.',
+        link: 'https://github.com/bagusahmadka/undangan-nikah.git'
+    },
+    {
+        image: './public/images/ngunduh-mantu.jpg',
+        title: 'Undangan Ngunduh Mantu',
+        tags: ['HTML', 'CSS', 'JavaScript'],
+        description: 'Website undangan digital khusus untuk acara perayaan Ngunduh Mantu. Didesain dengan tampilan responsif, animasi halus, dan kemudahan akses di berbagai perangkat seluler.',
+        link: 'https://github.com/bagusahmadka/ngunduh-mantu.git'
     }
 ];
-
-
 
 export function setupProjects() {
     const projectGallery = document.getElementById('project-gallery');
@@ -47,63 +80,103 @@ export function setupProjects() {
     const modalDescription = document.getElementById('modal-description');
     const modalLink = document.getElementById('modal-link');
     const modalTagsContainer = document.getElementById('modal-tags');
-    
-    // SVG fallback untuk error gambar
-    const errorImageSVG = 'data:image/svg+xml,%3Csvg xmlns=\'http://www.w3.org/2000/svg\' width=\'600\' height=\'400\' viewBox=\'0 0 600 400\'%3E%3Crect width=\'600\' height=\'400\' fill=\'%23CCCCCC\'/%3E%3Ctext x=\'50%25\' y=\'50%25\' font-size=\'24\' text-anchor=\'middle\' dominant-baseline=\'middle\' fill=\'%23FFFFFF\'%3EError%3C/text%3E%3C/svg%3E';
+
+    const errorSVG = "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='600' height='400' viewBox='0 0 600 400'%3E%3Crect width='600' height='400' fill='%231e3a5f'/%3E%3Ctext x='50%25' y='50%25' font-size='24' text-anchor='middle' dominant-baseline='middle' fill='%2300e5cc'%3EError%3C/text%3E%3C/svg%3E";
 
     if (!projectGallery) return;
+
+    projectGallery.innerHTML = '';
     
-    // Display Projects
-    projectGallery.innerHTML = ''; 
-    projectsData.forEach((project, index) => {
-        const projectItem = `
-            <div class="reveal reveal-up" style="transition-delay: ${index * 100}ms;">
-                <div class="bg-white/80 dark:bg-slate-800/80 backdrop-blur-sm rounded-xl shadow-lg hover:shadow-xl dark:shadow-none dark:hover:shadow-indigo-500/20 border border-transparent dark:border-slate-700 overflow-hidden transform hover:-translate-y-2 transition-all duration-300 cursor-pointer group h-full flex flex-col" data-index="${index}">
-                    <div class="relative h-56 overflow-hidden">
-                        <img src="${project.image}" alt="${project.title}" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" onerror="this.onerror=null; this.src='${errorImageSVG}';">
-                        <div class="absolute inset-0 bg-indigo-900/0 group-hover:bg-indigo-900/40 backdrop-blur-[0px] group-hover:backdrop-blur-sm transition-all duration-300 flex items-center justify-center">
-                            <span class="text-white text-lg font-semibold opacity-0 group-hover:opacity-100 transform translate-y-4 group-hover:translate-y-0 transition-all duration-300"><i class="fas fa-search-plus mr-2"></i> Lihat Detail</span>
+    const INITIAL_COUNT = 6;
+    let currentlyShown = 0;
+
+    function renderProjects(start, end) {
+        const projectsToRender = projectsData.slice(start, end);
+        projectsToRender.forEach((project, i) => {
+            const index = start + i;
+            const card = document.createElement('div');
+            card.className = 'reveal reveal-up';
+            // Only add transition delay for the initial batch to prevent weird delays on click
+            if (start === 0) {
+                card.style.transitionDelay = `${i * 100}ms`;
+            } else {
+                card.style.transitionDelay = `0ms`;
+            }
+            
+            card.innerHTML = `
+                <div class="project-card" data-index="${index}">
+                    <div class="project-img-wrapper">
+                        <img src="${project.image}" alt="${project.title}" onerror="this.onerror=null;this.src='${errorSVG}'">
+                        <div class="project-overlay">
+                            <span class="project-overlay-text"><i class="fas fa-search-plus"></i> Lihat Detail</span>
                         </div>
                     </div>
-                    <div class="p-6 flex flex-col flex-grow">
-                        <h3 class="text-xl font-bold mb-2 text-slate-800 dark:text-white group-hover:text-indigo-600 dark:group-hover:text-indigo-400 transition-colors">${project.title}</h3>
-                        <div class="flex flex-wrap gap-2 mb-4">
-                            ${project.tags.map(tag => `<span class="text-xs bg-indigo-50 dark:bg-indigo-900/50 text-indigo-600 dark:text-indigo-300 px-2.5 py-1 rounded-full font-medium border border-indigo-100 dark:border-indigo-800">${tag}</span>`).join('')}
+                    <div class="project-body">
+                        <h3 class="project-title">${project.title}</h3>
+                        <div class="project-tags">
+                            ${project.tags.map(tag => `<span class="project-tag">${tag}</span>`).join('')}
                         </div>
-                        <p class="text-slate-600 dark:text-slate-400 text-sm leading-relaxed mt-auto line-clamp-3">${project.description}</p>
+                        <p class="project-desc">${project.description}</p>
                     </div>
                 </div>
-            </div>
-        `;
-        projectGallery.innerHTML += projectItem;
-    });
-
-    // Setup project items click handlers
-    document.querySelectorAll('#project-gallery [data-index]').forEach(item => {
-        item.addEventListener('click', function() {
-            openModal(projectsData[this.dataset.index]);
+            `;
+            
+            // Attach click handler directly to the newly created card
+            card.querySelector('.project-card').addEventListener('click', function () {
+                openModal(projectsData[this.dataset.index]);
+            });
+            
+            projectGallery.appendChild(card);
+            
+            // If these are loaded via the button (not initial), trigger their animation manually
+            if (start > 0) {
+                setTimeout(() => {
+                    card.classList.add('reveal-active');
+                    card.style.transform = 'translateY(0)';
+                    card.style.opacity = '1';
+                }, i * 100 + 50);
+            }
         });
-    });
+        currentlyShown = end;
+    }
 
-    // Modal functionality
-    function openModal(project) {
-        if (!modalImg || !modalTitle || !modalDescription || !modalLink || !modalTagsContainer || !projectModal) return;
+    // Initial render
+    renderProjects(0, Math.min(INITIAL_COUNT, projectsData.length));
 
-        // Preload image before showing modal
-        const img = new Image();
-        img.onload = function() {
-            modalImg.src = project.image;
-        };
-        img.onerror = function() {
-            modalImg.src = errorImageSVG;
-        };
-        img.src = project.image;
+    // Show More Button
+    if (projectsData.length > INITIAL_COUNT) {
+        const btnContainer = document.createElement('div');
+        btnContainer.style.textAlign = 'center';
+        btnContainer.style.marginTop = '48px';
+        btnContainer.style.width = '100%';
+        btnContainer.style.gridColumn = '1 / -1'; // Ensure it spans full width if inside grid, but we will append to parent just in case.
         
+        const showMoreBtn = document.createElement('button');
+        showMoreBtn.className = 'btn-outline';
+        showMoreBtn.style.cursor = 'pointer';
+        showMoreBtn.innerHTML = 'Tampilkan Lebih Banyak <i class="fas fa-chevron-down" style="margin-left:8px;"></i>';
+        
+        showMoreBtn.addEventListener('click', () => {
+            renderProjects(currentlyShown, projectsData.length);
+            showMoreBtn.style.display = 'none';
+        });
+
+        btnContainer.appendChild(showMoreBtn);
+        // Append after the gallery
+        projectGallery.parentNode.appendChild(btnContainer);
+    }
+
+    function openModal(project) {
+        if (!projectModal) return;
+        const img = new Image();
+        img.onload = () => { modalImg.src = project.image; };
+        img.onerror = () => { modalImg.src = errorSVG; };
+        img.src = project.image;
+
         modalTitle.textContent = project.title;
         modalDescription.textContent = project.description;
-        
-        modalTagsContainer.innerHTML = project.tags.map(tag => 
-            `<span class="inline-block bg-slate-100 dark:bg-slate-700 text-slate-700 dark:text-slate-200 border border-slate-200 dark:border-slate-600 text-xs font-semibold mr-2 mb-2 px-3 py-1 rounded-full">${tag}</span>`
+        modalTagsContainer.innerHTML = project.tags.map(tag =>
+            `<span class="modal-tag">${tag}</span>`
         ).join('');
 
         if (project.link && project.link !== '#') {
@@ -112,46 +185,20 @@ export function setupProjects() {
         } else {
             modalLink.classList.add('hidden');
         }
-        
+
         projectModal.classList.remove('hidden');
-        setTimeout(() => { 
-            projectModal.classList.remove('opacity-0');
-            projectModal.querySelector('.transform').classList.remove('scale-95');
-        }, 10);
-        
-        document.body.style.overflow = 'hidden'; 
+        document.body.style.overflow = 'hidden';
     }
 
     function closeModal() {
         if (!projectModal) return;
-        
-        projectModal.classList.add('opacity-0');
-        const transform = projectModal.querySelector('.transform');
-        if (transform) transform.classList.add('scale-95');
-        
-        setTimeout(() => {
-            projectModal.classList.add('hidden');
-        }, 300); 
-        
+        projectModal.classList.add('hidden');
         document.body.style.overflow = 'auto';
     }
 
-    // Close modal handlers
-    if (closeModalBtn) {
-        closeModalBtn.addEventListener('click', closeModal);
-    }
-    
-    if (projectModal) {
-        projectModal.addEventListener('click', (event) => {
-            if (event.target === projectModal) { 
-                closeModal();
-            }
-        });
-    }
-    
-    document.addEventListener('keydown', (event) => { 
-        if (event.key === 'Escape' && projectModal && !projectModal.classList.contains('hidden')) {
-            closeModal();
-        }
+    closeModalBtn?.addEventListener('click', closeModal);
+    projectModal?.addEventListener('click', e => { if (e.target === projectModal) closeModal(); });
+    document.addEventListener('keydown', e => {
+        if (e.key === 'Escape' && projectModal && !projectModal.classList.contains('hidden')) closeModal();
     });
 }

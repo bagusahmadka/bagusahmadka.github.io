@@ -4,337 +4,249 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Bagus Ahmad Khoirul Ato'</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script>
-        tailwind.config = {
-            darkMode: 'class',
-        }
-    </script>
+    <title>Bagus Ahmad Khoirul Ato' | Portfolio</title>
+    <meta name="description"
+        content="Portfolio pribadi Bagus Ahmad Khoirul Ato' - Software Engineer spesialis Web Development. Membangun arsitektur digital yang handal dan antarmuka yang intuitif.">
     <script>
         // On page load or when changing themes, best to add inline in `head` to avoid FOUC
-        if (localStorage.getItem('color-theme') === 'dark' || (!('color-theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
-            document.documentElement.classList.add('dark');
+        if (localStorage.getItem('color-theme') === 'light') {
+            document.documentElement.classList.add('light-mode');
         } else {
-            document.documentElement.classList.remove('dark')
+            document.documentElement.classList.remove('light-mode');
         }
     </script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
         crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <link rel="stylesheet" href="css/style.css">
-    <style>
-        /* Inter font family */
-        body {
-            font-family: 'Inter', sans-serif;
-        }
-
-        /* Custom scrollbar (optional) */
-        ::-webkit-scrollbar {
-            width: 8px;
-        }
-
-        ::-webkit-scrollbar-track {
-            background: #f1f1f1;
-        }
-
-        ::-webkit-scrollbar-thumb {
-            background: #888;
-            border-radius: 10px;
-        }
-
-        ::-webkit-scrollbar-thumb:hover {
-            background: #555;
-        }
-
-        /* Styling for active nav link (optional) */
-        .nav-link-active {
-            color: #4f46e5;
-            /* indigo-600 */
-            font-weight: 600;
-        }
-    </style>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
 </head>
 
-<body
-    class="bg-slate-50 text-slate-800 antialiased dark:bg-slate-900 dark:text-slate-100 transition-colors duration-300">
+<body>
+    <!-- Particles Canvas -->
+    <canvas id="particles-canvas"></canvas>
+
     <!-- Navbar Component -->
-    <nav id="navbar"
-        class="bg-white/80 backdrop-blur-md shadow-md sticky top-0 z-50 transition-all duration-300 dark:bg-slate-900/80 dark:border-b dark:border-slate-800">
-        <div class="container mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="flex items-center justify-between h-16">
-                <div class="flex items-center">
-                    <a href="#hero"
-                        class="text-2xl font-bold text-indigo-600 dark:text-indigo-400 hover:text-indigo-700 dark:hover:text-indigo-300 transition-colors">
-                        Bagus Ahmad Khoirul Ato'
-                    </a>
-                </div>
-                <div class="hidden md:flex items-center space-x-6">
-                    <a href="#hero"
-                        class="nav-link text-slate-600 dark:text-slate-300 hover:text-indigo-600 dark:hover:text-indigo-400 px-3 py-2 rounded-md text-sm font-medium transition-colors">Beranda</a>
-                    <a href="#about"
-                        class="nav-link text-slate-600 dark:text-slate-300 hover:text-indigo-600 dark:hover:text-indigo-400 px-3 py-2 rounded-md text-sm font-medium transition-colors">Tentang
-                        Saya</a>
-                    <a href="#projects"
-                        class="nav-link text-slate-600 dark:text-slate-300 hover:text-indigo-600 dark:hover:text-indigo-400 px-3 py-2 rounded-md text-sm font-medium transition-colors">Proyek</a>
-                    <a href="#skills"
-                        class="nav-link text-slate-600 dark:text-slate-300 hover:text-indigo-600 dark:hover:text-indigo-400 px-3 py-2 rounded-md text-sm font-medium transition-colors">Keahlian</a>
-                    <a href="#contact"
-                        class="nav-link text-slate-600 dark:text-slate-300 hover:text-indigo-600 dark:hover:text-indigo-400 px-3 py-2 rounded-md text-sm font-medium transition-colors">Kontak</a>
-                    <button id="theme-toggle" type="button"
-                        class="text-slate-500 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800 focus:outline-none rounded-lg text-sm p-2.5 transition-colors">
-                        <i id="theme-toggle-dark-icon" class="hidden fas fa-moon fa-lg"></i>
-                        <i id="theme-toggle-light-icon" class="hidden fas fa-sun fa-lg"></i>
-                    </button>
-                </div>
-                <div class="md:hidden flex items-center">
-                    <button id="theme-toggle-mobile" type="button"
-                        class="text-slate-500 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800 focus:outline-none rounded-lg text-sm p-2.5 mr-2 transition-colors">
-                        <i id="theme-toggle-dark-icon-mobile" class="hidden fas fa-moon fa-lg"></i>
-                        <i id="theme-toggle-light-icon-mobile" class="hidden fas fa-sun fa-lg"></i>
-                    </button>
-                    <button id="menu-btn" type="button"
-                        class="text-slate-500 dark:text-slate-300 hover:text-indigo-600 dark:hover:text-indigo-400 focus:outline-none focus:text-indigo-600"
-                        aria-controls="mobile-menu" aria-expanded="false">
-                        <span class="sr-only">Buka menu utama</span>
-                        <i class="fas fa-bars fa-lg"></i>
-                    </button>
-                </div>
+    <nav id="navbar">
+        <div class="nav-container">
+            <a href="#hero" class="nav-brand">
+                &lt;Bagus Ahmad Khoirul Ato' /&gt;
+            </a>
+            <div class="nav-links" id="nav-links-desktop">
+                <a href="#hero" class="nav-link" data-section="hero">Beranda</a>
+                <a href="#about" class="nav-link" data-section="about">Tentang Saya</a>
+                <a href="#projects" class="nav-link" data-section="projects">Proyek</a>
+                <a href="#skills" class="nav-link" data-section="skills">Keahlian</a>
+                <a href="#contact" class="nav-link" data-section="contact">Kontak</a>
+                <button id="theme-toggle" type="button" class="theme-btn" aria-label="Toggle tema">
+                    <i id="theme-toggle-dark-icon" class="fas fa-moon"></i>
+                    <i id="theme-toggle-light-icon" class="fas fa-sun hidden"></i>
+                </button>
+            </div>
+            <div class="nav-mobile-actions">
+                <button id="theme-toggle-mobile" type="button" class="theme-btn" aria-label="Toggle tema">
+                    <i id="theme-toggle-dark-icon-mobile" class="fas fa-moon"></i>
+                    <i id="theme-toggle-light-icon-mobile" class="fas fa-sun hidden"></i>
+                </button>
+                <button id="menu-btn" type="button" aria-controls="mobile-menu" aria-expanded="false">
+                    <span class="sr-only">Buka menu utama</span>
+                    <i class="fas fa-bars fa-lg"></i>
+                </button>
             </div>
         </div>
-        <div id="mobile-menu"
-            class="md:hidden hidden bg-white/95 backdrop-blur-md dark:bg-slate-900/95 shadow-lg border-t border-slate-200 dark:border-slate-800">
-            <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3">
-                <a href="#hero"
-                    class="nav-link-mobile block text-slate-600 dark:text-slate-300 hover:bg-indigo-50 dark:hover:bg-slate-800 hover:text-indigo-600 dark:hover:text-indigo-400 px-3 py-2 rounded-md text-base font-medium transition-colors">Beranda</a>
-                <a href="#about"
-                    class="nav-link-mobile block text-slate-600 dark:text-slate-300 hover:bg-indigo-50 dark:hover:bg-slate-800 hover:text-indigo-600 dark:hover:text-indigo-400 px-3 py-2 rounded-md text-base font-medium transition-colors">Tentang
-                    Saya</a>
-                <a href="#projects"
-                    class="nav-link-mobile block text-slate-600 dark:text-slate-300 hover:bg-indigo-50 dark:hover:bg-slate-800 hover:text-indigo-600 dark:hover:text-indigo-400 px-3 py-2 rounded-md text-base font-medium transition-colors">Proyek</a>
-                <a href="#skills"
-                    class="nav-link-mobile block text-slate-600 dark:text-slate-300 hover:bg-indigo-50 dark:hover:bg-slate-800 hover:text-indigo-600 dark:hover:text-indigo-400 px-3 py-2 rounded-md text-base font-medium transition-colors">Keahlian</a>
-                <a href="#contact"
-                    class="nav-link-mobile block text-slate-600 dark:text-slate-300 hover:bg-indigo-50 dark:hover:bg-slate-800 hover:text-indigo-600 dark:hover:text-indigo-400 px-3 py-2 rounded-md text-base font-medium transition-colors">Kontak</a>
-            </div>
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="mobile-menu hidden">
+            <a href="#hero" class="nav-link-mobile" data-section="hero">Beranda</a>
+            <a href="#about" class="nav-link-mobile" data-section="about">Tentang Saya</a>
+            <a href="#projects" class="nav-link-mobile" data-section="projects">Proyek</a>
+            <a href="#skills" class="nav-link-mobile" data-section="skills">Keahlian</a>
+            <a href="#contact" class="nav-link-mobile" data-section="contact">Kontak</a>
         </div>
     </nav>
 
     <!-- Hero Component -->
-    <header id="hero"
-        class="bg-gradient-to-br from-indigo-600 to-purple-600 text-white pt-24 pb-16 md:pt-32 md:pb-24 min-h-screen flex items-center">
-        <div class="container mx-auto px-4 sm:px-6 lg:px-8 text-center">
-            <div class="w-32 h-32 md:w-40 md:h-40 mx-auto mb-6 relative reveal reveal-up">
-                <img src="./public/images/2.jpg" alt="Foto Profil Saya"
-                    class="w-full h-full rounded-full shadow-2xl border-4 border-white dark:border-slate-800 object-cover"
-                    onerror="this.onerror=null; this.src='data:image/svg+xml,%3Csvg xmlns=\'http://www.w3.org/2000/svg\' width=\'160\' height=\'160\' viewBox=\'0 0 160 160\'%3E%3Crect width=\'160\' height=\'160\' fill=\'%23CCCCCC\'/%3E%3Ctext x=\'50%25\' y=\'50%25\' font-size=\'18\' text-anchor=\'middle\' dominant-baseline=\'middle\' fill=\'%23FFFFFF\'%3EError%3C/text%3E%3C/svg%3E';">
+    <header id="hero" class="hero-section">
+        <div class="hero-container">
+            <div class="hero-avatar-wrapper reveal reveal-up">
+                <div class="hero-avatar-glow"></div>
+                <img src="./public/images/2.jpg" alt="Foto Profil Bagus Ahmad" class="hero-avatar"
+                    onerror="this.onerror=null; this.src='data:image/svg+xml,%3Csvg xmlns=\'http://www.w3.org/2000/svg\' width=\'160\' height=\'160\' viewBox=\'0 0 160 160\'%3E%3Crect width=\'160\' height=\'160\' fill=\'%231e3a5f\'/%3E%3Ctext x=\'50%25\' y=\'50%25\' font-size=\'18\' text-anchor=\'middle\' dominant-baseline=\'middle\' fill=\'%2300e5cc\'%3EBA%3C/text%3E%3C/svg%3E';">
             </div>
-            <h1 class="text-4xl sm:text-5xl md:text-6xl font-bold mb-2 reveal reveal-up"
-                style="transition-delay: 200ms;">
-                Halo, Saya <span class="text-yellow-300">Bagus Ahmad Khoirul Ato'</span>
+            <h1 class="hero-title reveal reveal-up" style="transition-delay:200ms;">
+                Halo, Saya <span class="gradient-text">Bagus Ahmad Khoirul Ato'</span>
             </h1>
-            <h2 class="text-xl sm:text-2xl md:text-3xl font-medium mb-6 text-indigo-100 reveal reveal-up"
-                style="transition-delay: 300ms; min-height: 36px;">
-                Saya seorang <span id="typing-text" class="text-yellow-300 typing-cursor"></span>
+            <h2 class="hero-subtitle reveal reveal-up" style="transition-delay:300ms;min-height:40px;">
+                Saya seorang <span id="typing-text" class="typing-cursor"></span>
             </h2>
-            <p class="text-lg sm:text-xl md:text-2xl text-indigo-100 mb-8 max-w-3xl mx-auto reveal reveal-up"
-                style="transition-delay: 400ms;">
-                Software Engineer spesialis Web Development. Berdedikasi dalam membangun arsitektur digital yang handal,
-                antarmuka yang intuitif, dan pengalaman pengguna yang memukau untuk menjawab tantangan bisnis modern.
-            </p>
-            <div class="space-y-4 sm:space-y-0 sm:space-x-4 reveal reveal-up" style="transition-delay: 600ms;">
-                <a href="#projects"
-                    class="inline-block bg-yellow-400 dark:bg-yellow-500 text-slate-800 dark:text-slate-900 px-8 py-3 rounded-lg text-lg font-semibold hover:bg-yellow-300 dark:hover:bg-yellow-400 transition-all duration-300 transform hover:scale-105 shadow-lg">
-                    <i class="fas fa-briefcase mr-2"></i> Lihat Proyek Saya
+            <div class="hero-quote-card reveal reveal-up" style="transition-delay:400ms;">
+                <p>Software Engineer spesialis <span class="highlight-text">Web Development</span>. Berdedikasi dalam
+                    membangun
+                    <span class="highlight-text">arsitektur digital</span> yang handal, antarmuka yang intuitif, dan
+                    <span class="highlight-text">pengalaman pengguna</span> yang memukau.
+                </p>
+            </div>
+            <div class="hero-buttons reveal reveal-up" style="transition-delay:600ms;">
+                <a href="#projects" class="btn-primary">
+                    <i class="fas fa-briefcase"></i> Lihat Proyek Saya
                 </a>
-                <a href="#contact"
-                    class="inline-block bg-transparent border-2 border-white text-white px-8 py-3 rounded-lg text-lg font-semibold hover:bg-white hover:text-indigo-600 transition-all duration-300 transform hover:scale-105 shadow-lg">
-                    <i class="fas fa-envelope mr-2"></i> Hubungi Saya
+                <a href="#contact" class="btn-secondary">
+                    <i class="fas fa-envelope"></i> Hubungi Saya
                 </a>
             </div>
         </div>
     </header>
 
     <!-- About Component -->
-    <section id="about" class="py-16 md:py-24 bg-white dark:bg-slate-900 transition-colors duration-300">
-        <div class="container mx-auto px-4 sm:px-6 lg:px-8">
-            <h2
-                class="text-3xl md:text-4xl font-bold text-center text-slate-800 dark:text-white mb-12 relative pb-4 after:content-[''] after:absolute after:left-1/2 after:-translate-x-1/2 after:bottom-0 after:w-20 after:h-1 after:bg-indigo-600 dark:after:bg-indigo-400 after:rounded-full">
-                Tentang Saya
-            </h2>
-            <div class="flex flex-col md:flex-row items-center md:space-x-12">
-                <div class="md:w-1/3 mb-8 md:mb-0 reveal reveal-left">
-                    <div
-                        class="rounded-xl shadow-xl w-full max-w-sm mx-auto overflow-hidden border-4 border-white dark:border-slate-800">
-                        <img src="./public/images/same.jpg" alt="Foto Tentang Saya" class="w-full h-full object-cover"
-                            onerror="this.onerror=null; this.src='data:image/svg+xml,%3Csvg xmlns=\'http://www.w3.org/2000/svg\' width=\'400\' height=\'400\' viewBox=\'0 0 400 400\'%3E%3Crect width=\'400\' height=\'400\' fill=\'%23CCCCCC\'/%3E%3Ctext x=\'50%25\' y=\'50%25\' font-size=\'24\' text-anchor=\'middle\' dominant-baseline=\'middle\' fill=\'%23FFFFFF\'%3EError%3C/text%3E%3C/svg%3E';">
-                    </div>
+    <section id="about" class="section">
+        <div class="container">
+            <h2 class="section-title reveal reveal-up">Tentang Saya</h2>
+            <div class="about-grid">
+                <div class="about-img-wrapper reveal reveal-left">
+                    <div class="about-img-glow"></div>
+                    <img src="./public/images/same.jpg" alt="Foto Tentang Saya" class="about-img"
+                        onerror="this.onerror=null; this.src='data:image/svg+xml,%3Csvg xmlns=\'http://www.w3.org/2000/svg\' width=\'400\' height=\'400\' viewBox=\'0 0 400 400\'%3E%3Crect width=\'400\' height=\'400\' fill=\'%231e3a5f\'/%3E%3Ctext x=\'50%25\' y=\'50%25\' font-size=\'24\' text-anchor=\'middle\' dominant-baseline=\'middle\' fill=\'%2300e5cc\'%3EFoto%3C/text%3E%3C/svg%3E';">
                 </div>
-                <div class="md:w-2/3 text-slate-600 dark:text-slate-300 text-lg leading-relaxed reveal reveal-right">
-                    <p class="mb-4 text-justify">
+                <div class="about-content reveal reveal-right">
+                    <p class="about-role">Software Engineer & Founder of Technorra</p>
+                    <p class="about-text">
                         Halo! Saya Bagus Ahmad Khoirul Ato', seorang Software Engineer dengan spesialisasi dalam
                         merancang dan mengembangkan solusi teknologi modern berbasis web dan mobile. Berlatar belakang
                         pendidikan D3 Teknik Informatika di Politeknik Negeri Semarang, saya berfokus pada pengembangan
                         sistem <em>End-to-End</em> yang menggabungkan logika <em>backend</em> yang solid dengan
                         antarmuka <em>frontend</em> yang memukau.
                     </p>
-                    <p class="mb-4 text-justify">
-                        Dalam pengalaman profesional saya sebagai <em>Freelancer</em> selama lebih dari 2 tahun, saya
+                    <p class="about-text">
+                        Selain itu, saya merupakan <strong>Founder dari Technorra</strong>, sebuah agensi digital yang berfokus pada penyediaan layanan teknologi dan desain kreatif untuk membantu bisnis berkembang di era digital. Kunjungi agensi kami di <a href="https://technorra.vercel.app" target="_blank" rel="noopener noreferrer" style="color: var(--accent); font-weight: 500; text-decoration: underline; text-underline-offset: 4px;">technorra.vercel.app</a>.
+                    </p>
+                    <p class="about-text">
+                        Dalam pengalaman profesional saya selama lebih dari 2 tahun, saya
                         terbiasa berinteraksi langsung dengan klien untuk menerjemahkan kompleksitas masalah bisnis
                         menjadi produk digital yang fungsional, terukur (<em>scalable</em>), dan <em>user-centric</em>.
                         Saya juga aktif mengeksplorasi pemanfaatan <em>Artificial Intelligence</em> (AI) untuk
-                        mempercepat siklus <em>development</em> dan memastikan kode yang dihasilkan berada pada standar
-                        <em>Clean Code</em> tertinggi.
+                        mempercepat siklus <em>development</em>.
                     </p>
-                    <p class="mb-6 text-justify">
+                    <p class="about-text">
                         Lebih dari sekadar menulis baris kode, saya menaruh nilai tinggi pada komunikasi dan kolaborasi.
                         Pengalaman memimpin berbagai inisiatif strategis sebagai Ketua Organisasi Mahasiswa telah
-                        mengasah kemampuan manajerial, <em>Problem Solving</em>, dan <em>Public Speaking</em> saya
-                        memungkinkan saya untuk tidak hanya menjadi eksekutor teknis, namun juga komunikator yang mampu
-                        menjembatani kebutuhan teknis dan visi bisnis.
+                        mengasah kemampuan manajerial, <em>Problem Solving</em>, dan <em>Public Speaking</em> saya.
                     </p>
-                    <a href="#contact"
-                        class="inline-block bg-indigo-600 dark:bg-indigo-500 text-white px-6 py-3 rounded-lg font-medium hover:bg-indigo-700 dark:hover:bg-indigo-600 transition-colors shadow-md hover:shadow-lg transform hover:scale-105">
-                        Mari Terhubung <i class="fas fa-arrow-right ml-2"></i>
-                    </a>
-                    <!-- Tombol Unduh CV -->
-                    <a href="./public/CV_Bagus_Ahmad.pdf" download="CV_BagusAhmadKhoirulAto.pdf"
-                        class="inline-block bg-green-600 dark:bg-green-700 text-white px-6 py-3 rounded-lg font-medium hover:bg-green-700 dark:hover:bg-green-600 transition-colors shadow-md hover:shadow-lg transform hover:scale-105 ml-4 mt-4 md:mt-0">
-                        <i class="fas fa-download mr-2"></i>Unduh CV
-                    </a>
+                    <div class="about-actions">
+                        <a href="#contact" class="btn-primary">
+                            Mari Terhubung <i class="fas fa-arrow-right"></i>
+                        </a>
+                        <a href="./public/CV_Bagus_Ahmad.pdf" download="CV_BagusAhmadKhoirulAto.pdf"
+                            class="btn-outline">
+                            <i class="fas fa-download"></i> Unduh CV
+                        </a>
+                    </div>
                 </div>
             </div>
         </div>
     </section>
 
     <!-- Projects Component -->
-    <section id="projects" class="py-16 md:py-24 bg-slate-100 dark:bg-slate-900 transition-colors duration-300">
-        <div class="container mx-auto px-4 sm:px-6 lg:px-8">
-            <h2
-                class="text-3xl md:text-4xl font-bold text-center text-slate-800 dark:text-white mb-12 relative pb-4 after:content-[''] after:absolute after:left-1/2 after:-translate-x-1/2 after:bottom-0 after:w-20 after:h-1 after:bg-indigo-600 dark:after:bg-indigo-400 after:rounded-full">
-                Proyek Unggulan
-            </h2>
-            <div id="project-gallery" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
-            </div>
+    <section id="projects" class="section section-alt">
+        <div class="container">
+            <h2 class="section-title reveal reveal-up">Proyek Unggulan</h2>
+            <div id="project-gallery" class="projects-grid"></div>
         </div>
     </section>
 
     <!-- Project Modal -->
-    <div id="project-modal"
-        class="fixed inset-0 bg-black/75 backdrop-blur-sm flex items-center justify-center p-4 hidden z-[100] transition-opacity duration-300 opacity-0">
-        <div
-            class="bg-white dark:bg-slate-800 p-6 sm:p-8 rounded-xl shadow-2xl max-w-2xl w-full relative transform scale-95 transition-transform duration-300 border dark:border-slate-700">
-            <button id="close-modal-btn"
-                class="absolute top-4 right-4 text-slate-500 dark:text-slate-400 hover:text-red-600 dark:hover:text-red-400 text-2xl transition-colors"
-                aria-label="Tutup modal">
+    <div id="project-modal" class="modal-overlay hidden">
+        <div class="modal-box">
+            <button id="close-modal-btn" class="modal-close" aria-label="Tutup modal">
                 <i class="fas fa-times"></i>
             </button>
-            <div
-                class="w-full max-h-80 flex items-center justify-center overflow-hidden rounded-lg mb-4 bg-slate-100 dark:bg-slate-900">
-                <img id="modal-img" src="" alt="Detail Proyek" class="w-full h-auto object-contain"
+            <div class="modal-img-wrapper">
+                <img id="modal-img" src="" alt="Detail Proyek"
                     onerror="this.onerror=null; this.src='data:image/svg+xml,%3Csvg xmlns=\'http://www.w3.org/2000/svg\' width=\'600\' height=\'400\' viewBox=\'0 0 600 400\'%3E%3Crect width=\'600\' height=\'400\' fill=\'%23CCCCCC\'/%3E%3Ctext x=\'50%25\' y=\'50%25\' font-size=\'24\' text-anchor=\'middle\' dominant-baseline=\'middle\' fill=\'%23FFFFFF\'%3EError Memuat Gambar%3C/text%3E%3C/svg%3E';">
             </div>
-            <h3 id="modal-title" class="text-2xl font-bold mb-2 text-slate-800 dark:text-white"></h3>
-            <div id="modal-tags" class="mb-3"></div>
-            <p id="modal-description"
-                class="text-slate-600 dark:text-slate-300 mb-4 text-sm sm:text-base leading-relaxed max-h-40 overflow-y-auto">
-            </p>
-            <a id="modal-link" href="#" target="_blank" rel="noopener noreferrer"
-                class="inline-flex items-center bg-indigo-600 text-white px-5 py-2.5 rounded-lg font-medium hover:bg-indigo-700 transition-colors shadow-md hover:shadow-lg transform hover:scale-105">
-                <i class="fas fa-external-link-alt mr-2"></i> Kunjungi Proyek
+            <h3 id="modal-title" class="modal-title"></h3>
+            <div id="modal-tags" class="modal-tags"></div>
+            <p id="modal-description" class="modal-description"></p>
+            <a id="modal-link" href="#" target="_blank" rel="noopener noreferrer" class="btn-primary">
+                <i class="fas fa-external-link-alt"></i> Kunjungi Proyek
             </a>
         </div>
     </div>
 
     <!-- Skills Component -->
-    <section id="skills" class="py-16 md:py-24 bg-white dark:bg-slate-900 transition-colors duration-300">
-        <div class="container mx-auto px-4 sm:px-6 lg:px-8">
-            <h2
-                class="text-3xl md:text-4xl font-bold text-center text-slate-800 dark:text-white mb-12 relative pb-4 after:content-[''] after:absolute after:left-1/2 after:-translate-x-1/2 after:bottom-0 after:w-20 after:h-1 after:bg-indigo-600 dark:after:bg-indigo-400 after:rounded-full">
-                Keahlian Teknis
-            </h2>
-            <div id="skills-list"
-                class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-6 text-center">
-            </div>
+    <section id="skills" class="section">
+        <div class="container">
+            <h2 class="section-title reveal reveal-up">Keahlian Teknis</h2>
+            <div id="skills-list" class="skills-grid"></div>
         </div>
     </section>
 
     <!-- Contact Component -->
-    <section id="contact" class="py-16 md:py-24 bg-slate-100 dark:bg-slate-900 transition-colors duration-300">
-        <div class="container mx-auto px-4 sm:px-6 lg:px-8">
-            <h2
-                class="text-3xl md:text-4xl font-bold text-center text-slate-800 dark:text-white mb-12 relative pb-4 after:content-[''] after:absolute after:left-1/2 after:-translate-x-1/2 after:bottom-0 after:w-20 after:h-1 after:bg-indigo-600 dark:after:bg-indigo-400 after:rounded-full">
-                Hubungi Saya
-            </h2>
-            <form id="contact-form"
-                class="max-w-xl mx-auto bg-white dark:bg-slate-800 border border-transparent dark:border-slate-700 p-8 rounded-xl shadow-xl reveal reveal-up">
-                <p class="text-center text-slate-600 dark:text-slate-300 mb-6">Ada pertanyaan atau ingin berkolaborasi?
-                    Jangan ragu untuk mengirim pesan.</p>
-                <div class="mb-5">
-                    <label for="name" class="block text-slate-700 dark:text-slate-300 text-sm font-semibold mb-2">Nama
-                        Lengkap <span class="text-red-500">*</span></label>
-                    <input type="text" id="name" name="from_name" required
-                        class="shadow-sm appearance-none border border-slate-300 dark:border-slate-600 bg-white dark:bg-slate-900 rounded-lg w-full py-3 px-4 text-slate-700 dark:text-white leading-tight focus:outline-none focus:ring-2 focus:ring-indigo-500 dark:focus:ring-indigo-400 focus:border-indigo-500 dark:focus:border-indigo-400 transition-colors">
+    <section id="contact" class="section section-alt">
+        <div class="container">
+            <h2 class="section-title reveal reveal-up">Hubungi Saya</h2>
+            <form id="contact-form" class="contact-form reveal reveal-up">
+                <p class="contact-form-intro">Ada pertanyaan atau ingin berkolaborasi? Jangan ragu untuk mengirim pesan.
+                </p>
+                <div class="form-group">
+                    <label for="name" class="form-label">Nama Lengkap <span class="required">*</span></label>
+                    <input type="text" id="name" name="from_name" required class="form-input" placeholder="Nama Anda">
                 </div>
-                <div class="mb-5">
-                    <label for="email"
-                        class="block text-slate-700 dark:text-slate-300 text-sm font-semibold mb-2">Alamat Email <span
-                            class="text-red-500">*</span></label>
-                    <input type="email" id="email" name="reply_to" required
-                        class="shadow-sm appearance-none border border-slate-300 dark:border-slate-600 bg-white dark:bg-slate-900 rounded-lg w-full py-3 px-4 text-slate-700 dark:text-white leading-tight focus:outline-none focus:ring-2 focus:ring-indigo-500 dark:focus:ring-indigo-400 focus:border-indigo-500 dark:focus:border-indigo-400 transition-colors">
+                <div class="form-group">
+                    <label for="email" class="form-label">Alamat Email <span class="required">*</span></label>
+                    <input type="email" id="email" name="reply_to" required class="form-input"
+                        placeholder="email@contoh.com">
                 </div>
-                <div class="mb-6">
-                    <label for="message"
-                        class="block text-slate-700 dark:text-slate-300 text-sm font-semibold mb-2">Pesan <span
-                            class="text-red-500">*</span></label>
-                    <textarea id="message" name="message" rows="5" required
-                        class="shadow-sm appearance-none border border-slate-300 dark:border-slate-600 bg-white dark:bg-slate-900 rounded-lg w-full py-3 px-4 text-slate-700 dark:text-white leading-tight focus:outline-none focus:ring-2 focus:ring-indigo-500 dark:focus:ring-indigo-400 focus:border-indigo-500 dark:focus:border-indigo-400 transition-colors"></textarea>
+                <div class="form-group">
+                    <label for="message" class="form-label">Pesan <span class="required">*</span></label>
+                    <textarea id="message" name="message" rows="5" required class="form-input"
+                        placeholder="Tulis pesan Anda di sini..."></textarea>
                 </div>
-                <div class="text-center">
-                    <button type="submit" id="submit-contact-form"
-                        class="bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-3 px-8 rounded-lg focus:outline-none focus:shadow-outline transition-all duration-300 transform hover:scale-105 shadow-md hover:shadow-lg">
-                        <i class="fas fa-paper-plane mr-2"></i> Kirim Pesan
+                <div class="form-submit">
+                    <button type="submit" id="submit-contact-form" class="btn-primary btn-full">
+                        <i class="fas fa-paper-plane"></i> Kirim Pesan
                     </button>
                 </div>
-                <p id="form-status" class="text-center mt-4 text-sm"></p>
+                <p id="form-status" class="form-status"></p>
             </form>
         </div>
     </section>
 
     <!-- Footer Component -->
-    <footer class="bg-slate-800 dark:bg-slate-950 text-slate-300 py-12 text-center transition-colors duration-300">
-        <div class="container mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="mb-4">
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-social">
                 <a href="https://www.linkedin.com/in/bagus-ahmad-khoirul-ato-70a13b2ab?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app"
-                    target="_blank" rel="noopener noreferrer" aria-label="LinkedIn"
-                    class="text-slate-400 hover:text-indigo-400 mx-3 text-2xl transition-colors"><i
-                        class="fab fa-linkedin"></i></a>
+                    target="_blank" rel="noopener noreferrer" aria-label="LinkedIn" class="footer-social-link">
+                    <i class="fab fa-linkedin"></i>
+                </a>
                 <a href="https://github.com/bagusahmadka" target="_blank" rel="noopener noreferrer" aria-label="GitHub"
-                    class="text-slate-400 hover:text-indigo-400 mx-3 text-2xl transition-colors"><i
-                        class="fab fa-github"></i></a>
+                    class="footer-social-link">
+                    <i class="fab fa-github"></i>
+                </a>
                 <a href="https://www.instagram.com/bagusahmaad?utm_source=qr&igsh=cHc3NGx5a3J0ZnV5" target="_blank"
-                    rel="noopener noreferrer" aria-label="Instagram"
-                    class="text-slate-400 hover:text-indigo-400 mx-3 text-2xl transition-colors"><i
-                        class="fab fa-instagram"></i></a>
-                <a href="mailto:bagusahmadka@gmail.com" aria-label="Email"
-                    class="text-slate-400 hover:text-indigo-400 mx-3 text-2xl transition-colors"><i
-                        class="fas fa-envelope"></i></a>
+                    rel="noopener noreferrer" aria-label="Instagram" class="footer-social-link">
+                    <i class="fab fa-instagram"></i>
+                </a>
+                <a href="mailto:bagusahmadka@gmail.com" aria-label="Email" class="footer-social-link">
+                    <i class="fas fa-envelope"></i>
+                </a>
             </div>
-            <p class="text-sm">&copy; <span id="currentYear"></span> Bagus Ahmad Khoirul Ato'. Hak Cipta Dilindungi.</p>
+            <p class="footer-copy">&copy; <span id="currentYear"></span> Bagus Ahmad Khoirul Ato'. Hak Cipta Dilindungi.
+            </p>
         </div>
     </footer>
 
     <!-- Button scroll to top -->
-    <button id="scrollTopBtn"
-        class="hidden fixed bottom-5 right-5 bg-indigo-600 hover:bg-indigo-700 text-white p-3 rounded-full shadow-lg transition-all duration-300 z-50"
-        aria-label="Gulir ke atas">
+    <button id="scrollTopBtn" class="scroll-top-btn hidden" aria-label="Gulir ke atas">
         <i class="fas fa-arrow-up"></i>
     </button>
-    <!-- EmailJS untuk fungsi form kontak -->
+
+    <!-- EmailJS -->
     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
-    <!-- File JS utama yang akan mengimpor semua komponen -->
+    <!-- Particles JS -->
+    <script src="https://cdn.jsdelivr.net/npm/tsparticles-slim@2.11.1/tsparticles.slim.bundle.min.js"></script>
+    <!-- Main JS -->
     <script type="module" src="/js/main.js"></script>
 </body>
 
