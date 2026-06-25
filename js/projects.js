@@ -46,7 +46,7 @@ export const projectsData = [
         title: 'Syntara (Publikasi Jurnal)',
         tags: ['Web Development', 'Portal Jurnal'],
         description: 'Aplikasi web platform jasa publikasi jurnal bernama Syntara. Sistem ini dirancang untuk memudahkan proses pengelolaan dan publikasi karya ilmiah serta jurnal secara efisien.',
-        link: 'https://github.com/afikque23/Syntara.git'
+        link: 'https://syntarapublikasi.my.id/'
     },
     {
         image: './public/images/traciio.jpg',
@@ -86,7 +86,7 @@ export function setupProjects() {
     if (!projectGallery) return;
 
     projectGallery.innerHTML = '';
-    
+
     const INITIAL_COUNT = 6;
     let currentlyShown = 0;
 
@@ -102,7 +102,7 @@ export function setupProjects() {
             } else {
                 card.style.transitionDelay = `0ms`;
             }
-            
+
             card.innerHTML = `
                 <div class="project-card" data-index="${index}">
                     <div class="project-img-wrapper">
@@ -120,14 +120,14 @@ export function setupProjects() {
                     </div>
                 </div>
             `;
-            
+
             // Attach click handler directly to the newly created card
             card.querySelector('.project-card').addEventListener('click', function () {
                 openModal(projectsData[this.dataset.index]);
             });
-            
+
             projectGallery.appendChild(card);
-            
+
             // If these are loaded via the button (not initial), trigger their animation manually
             if (start > 0) {
                 setTimeout(() => {
@@ -150,12 +150,12 @@ export function setupProjects() {
         btnContainer.style.marginTop = '48px';
         btnContainer.style.width = '100%';
         btnContainer.style.gridColumn = '1 / -1'; // Ensure it spans full width if inside grid, but we will append to parent just in case.
-        
+
         const showMoreBtn = document.createElement('button');
         showMoreBtn.className = 'btn-outline';
         showMoreBtn.style.cursor = 'pointer';
         showMoreBtn.innerHTML = 'Tampilkan Lebih Banyak <i class="fas fa-chevron-down" style="margin-left:8px;"></i>';
-        
+
         showMoreBtn.addEventListener('click', () => {
             renderProjects(currentlyShown, projectsData.length);
             showMoreBtn.style.display = 'none';
